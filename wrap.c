@@ -41,12 +41,11 @@ int Connect(int fd, const struct sockaddr *sa, socklen_t salen) {
     return n;
 }
 
-int Listen(int fd, int backlog)
-{
+int Listen(int fd, int backlog) {
     int n;
 
-	if ((n = listen(fd, backlog)) < 0)
-		perr_exit("listen error");
+    if ((n = listen(fd, backlog)) < 0)
+	perr_exit("listen error");
 
     return n;
 }
@@ -73,8 +72,7 @@ again:
 	return n;
 }
 
-ssize_t Write(int fd, const void *ptr, size_t nbytes)
-{
+ssize_t Write(int fd, const void *ptr, size_t nbytes) {
 	ssize_t n;
 
 again:
@@ -87,8 +85,7 @@ again:
 	return n;
 }
 
-int Close(int fd)
-{
+int Close(int fd) {
     int n;
 	if ((n = close(fd)) == -1)
 		perr_exit("close error");
@@ -97,8 +94,7 @@ int Close(int fd)
 }
 
 /*参三: 应该读取固定的字节数数据*/
-ssize_t Readn(int fd, void *vptr, size_t n)
-{
+ssize_t Readn(int fd, void *vptr, size_t n) {
 	size_t  nleft;              //usigned int 剩余未读取的字节数
 	ssize_t nread;              //int 实际读到的字节数
 	char   *ptr;
@@ -205,4 +201,3 @@ int tcp4bind(short port,const char *IP) {
     Bind(lfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr));
     return lfd;
 }
-
