@@ -8,7 +8,7 @@
 #include <strings.h>
 
 void perr_exit(const char *s) {
-  perror(s);
+	perror(s);
 	exit(-1);
 }
 
@@ -51,8 +51,7 @@ int Listen(int fd, int backlog)
     return n;
 }
 
-int Socket(int family, int type, int protocol)
-{
+int Socket(int family, int type, int protocol) {
 	int n;
 
 	if ((n = socket(family, type, protocol)) < 0)
@@ -61,8 +60,7 @@ int Socket(int family, int type, int protocol)
 	return n;
 }
 
-ssize_t Read(int fd, void *ptr, size_t nbytes)
-{
+ssize_t Read(int fd, void *ptr, size_t nbytes) {
 	ssize_t n;
 
 again:
@@ -123,8 +121,7 @@ ssize_t Readn(int fd, void *vptr, size_t n)
 	return n - nleft;
 }
 /*:固定的字节数数据*/
-ssize_t Writen(int fd, const void *vptr, size_t n)
-{
+ssize_t Writen(int fd, const void *vptr, size_t n) {
 	size_t nleft;
 	ssize_t nwritten;
 	const char *ptr;
@@ -145,8 +142,7 @@ ssize_t Writen(int fd, const void *vptr, size_t n)
 	return n;
 }
 
-static ssize_t my_read(int fd, char *ptr)
-{
+static ssize_t my_read(int fd, char *ptr) {
 	static int read_cnt;
 	static char *read_ptr;
 	static char read_buf[100];
@@ -167,8 +163,7 @@ again:
 	return 1;
 }
 
-ssize_t Readline(int fd, void *vptr, size_t maxlen)
-{
+ssize_t Readline(int fd, void *vptr, size_t maxlen) {
 	ssize_t n, rc;
 	char    c, *ptr;
 
@@ -189,8 +184,7 @@ ssize_t Readline(int fd, void *vptr, size_t maxlen)
 	return n;
 }
 
-int tcp4bind(short port,const char *IP)
-{
+int tcp4bind(short port,const char *IP) {
     struct sockaddr_in serv_addr;
     int lfd = Socket(AF_INET,SOCK_STREAM,0);
     bzero(&serv_addr,sizeof(serv_addr));
@@ -206,7 +200,7 @@ int tcp4bind(short port,const char *IP)
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port   = htons(port);
    // int opt = 1;
-	//setsockopt(lfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+    //setsockopt(lfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
     Bind(lfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr));
     return lfd;
